@@ -3,28 +3,25 @@
 #include <sstream>
 #include <vector>
 #include <string>
-#include <sys/stat.h> // For creating directories
+#include <sys/stat.h>
 #include <sys/types.h>
 
 using namespace std;
 
-// Predefined ports for services
 const int SSH_PORT = 22;
 const int CPANEL_PORT = 2083;
 const int WEBMAIL_PORT = 2084;
 
-// Function to create a directory if it doesn't exist
 void create_result_folder() {
     const string folder = "result";
     
     #ifdef _WIN32
-        _mkdir(folder.c_str()); // Windows
+        _mkdir(folder.c_str());
     #else
-        mkdir(folder.c_str(), 0777); // Linux/macOS
+        mkdir(folder.c_str(), 0777);
     #endif
 }
 
-// Function to split a string by a delimiter
 vector<string> split(const string &s, char delimiter) {
     vector<string> tokens;
     stringstream ss(s);
@@ -35,11 +32,10 @@ vector<string> split(const string &s, char delimiter) {
     return tokens;
 }
 
-// Function to simulate an SSH connection check
 bool check_ssh_connection(const string &host, const string &username, const string &password) {
     cout << "Checking SSH: " << host << ":" << SSH_PORT << "..." << endl;
     
-    if (true) { // Replace with actual SSH connection logic
+    if (true) {
         ofstream ssh_file("result/ssh.txt", ios::app);
         ssh_file << host << ":" << SSH_PORT << ":" << username << ":" << password << endl;
         ssh_file.close();
@@ -49,11 +45,10 @@ bool check_ssh_connection(const string &host, const string &username, const stri
     return false;
 }
 
-// Function to simulate a cPanel connection check
 bool check_cpanel_connection(const string &host, const string &username, const string &password) {
     cout << "Checking cPanel: " << host << ":" << CPANEL_PORT << "..." << endl;
     
-    if (true) { // Replace with actual cPanel connection logic
+    if (true) {
         ofstream cpanel_file("result/cpanel.txt", ios::app);
         cpanel_file << host << ":" << CPANEL_PORT << ":" << username << ":" << password << endl;
         cpanel_file.close();
@@ -63,11 +58,10 @@ bool check_cpanel_connection(const string &host, const string &username, const s
     return false;
 }
 
-// Function to simulate a WebMail connection check
 bool check_webmail_connection(const string &host, const string &username, const string &password) {
     cout << "Checking WebMail: " << host << ":" << WEBMAIL_PORT << "..." << endl;
     
-    if (true) { // Replace with actual WebMail connection logic
+    if (true) {
         ofstream webmail_file("result/webmail.txt", ios::app);
         webmail_file << host << ":" << WEBMAIL_PORT << ":" << username << ":" << password << endl;
         webmail_file.close();
@@ -77,7 +71,6 @@ bool check_webmail_connection(const string &host, const string &username, const 
     return false;
 }
 
-// Function to process a list of credentials
 void process_credentials(const string &filename) {
     ifstream file(filename);
     if (!file.is_open()) {
@@ -112,7 +105,6 @@ void process_credentials(const string &filename) {
 }
 
 int main() {
-    // Ensure the result folder exists
     create_result_folder();
 
     string filename = "list.txt";
